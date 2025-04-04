@@ -1,0 +1,91 @@
+import json
+
+with open("/home/arondot/Documents/capsid_protein__YP_002775441__Grapevine_Syrah_virus_1__630199.scores.json", "r") as file:
+    data = json.load(file)
+
+data
+str(data)
+
+pLDDT = data["plddt"]
+pLDDT
+
+moyenne = sum(pLDDT)/len(pLDDT)
+moyenne
+
+
+## test pour moyenne général 
+
+import os
+import glob
+
+## test sur un dossier
+
+## liste les fichiers d'un dossier 
+os.listdir("/home/arondot/Documents/viral_structures/Adenoviridae")
+
+## Liste les fichiers/dossier correspondant au motif (ici .json)
+glob.glob("/home/arondot/Documents/viral_structures/Adenoviridae/*.json")
+
+data = glob.glob("/home/arondot/Documents/viral_structures/Adenoviridae/*.json")
+data 
+len(data)
+
+type(data)
+
+'''
+TEST non concluant 
+
+for i in data:
+    plddt = i["plddt"]
+
+data[1]
+plddt = (data[1["plddt"]])
+data[1]["plddt"]
+'''
+
+E=data[1]
+E
+
+with open(E, "r") as file:
+    G = json.load(file)
+G
+
+plddt = G["plddt"]
+plddt
+
+moyenne = sum(plddt)/len(plddt)
+moyenne
+
+'''
+MARCHE PAS
+for i in data:
+    i = 1
+    E=data[i]
+    with open(E, "r") as file:
+        G = json.load(file)
+    plddt = G["plddt"]
+    moyenne = sum(plddt)/len(plddt)
+    print(moyenne)
+    i = i + 1
+'''
+
+moyenne_list = []
+## Marche mais erreur inconnu à partir du fichier n°558
+i = 1
+while i<len(data):
+    E=data[i]
+    with open(E, "r") as file:
+        G = json.load(file)
+    plddt = G["plddt"]
+    moyenne = sum(plddt)/len(plddt)
+    print(moyenne)
+    i = i + 1
+    moyenne_list.append(moyenne)
+
+
+i
+moyenne
+moyenne_list
+
+moyenne_general = sum(moyenne_list)/len(moyenne_list)
+moyenne_general
