@@ -1,4 +1,10 @@
 import json
+import os
+import glob
+
+#############################
+## Pour un fichier : 
+#############################
 
 with open("/home/arondot/Documents/capsid_protein__YP_002775441__Grapevine_Syrah_virus_1__630199.scores.json", "r") as file:
     data = json.load(file)
@@ -12,13 +18,13 @@ pLDDT
 moyenne = sum(pLDDT)/len(pLDDT)
 moyenne
 
+#####################################
+##
+## test pour moyenne général d'une famille
+##
+#####################################
 
-## test pour moyenne général 
-
-import os
-import glob
-
-## test sur un dossier
+## Calcul moyenne pLDDT au sein d'un même famille (ici Adenoviridae)
 
 ## liste les fichiers d'un dossier 
 os.listdir("/home/arondot/Documents/viral_structures/Adenoviridae")
@@ -31,17 +37,6 @@ data
 len(data)
 
 type(data)
-
-'''
-TEST non concluant 
-
-for i in data:
-    plddt = i["plddt"]
-
-data[1]
-plddt = (data[1["plddt"]])
-data[1]["plddt"]
-'''
 
 E=data[1]
 E
@@ -56,10 +51,10 @@ plddt
 moyenne = sum(plddt)/len(plddt)
 moyenne
 
-'''
-MARCHE PAS
-for i in data:
-    i = 1
+moyenne_list = []
+## Marche mais erreur inconnu à partir du fichier n°558 (fichier vide)
+i = 1
+while i<len(data):
     E=data[i]
     with open(E, "r") as file:
         G = json.load(file)
@@ -67,10 +62,31 @@ for i in data:
     moyenne = sum(plddt)/len(plddt)
     print(moyenne)
     i = i + 1
-'''
+    moyenne_list.append(moyenne)
+
+len(data)
+i
+moyenne
+moyenne_list
+
+moyenne_general = sum(moyenne_list)/len(moyenne_list)
+moyenne_general
+
+data[558]
+
+#######################################
+##
+## Calcul moyenne pLDDT de toute les familles (hors undefined_family)
+##
+#######################################
+
+os.listdir("/home/arondot/Documents/viral_structures/")
+data = glob.glob("/home/arondot/Documents/viral_structures/*viridae/*.json")
+
+len(data)
 
 moyenne_list = []
-## Marche mais erreur inconnu à partir du fichier n°558
+## Marche mais erreur inconnu à partir du fichier n°28483 (fichier vide)
 i = 1
 while i<len(data):
     E=data[i]
@@ -86,6 +102,7 @@ while i<len(data):
 i
 moyenne
 moyenne_list
-
 moyenne_general = sum(moyenne_list)/len(moyenne_list)
 moyenne_general
+
+data[28483]
