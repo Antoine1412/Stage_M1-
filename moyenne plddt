@@ -9,14 +9,9 @@ import glob
 with open("/home/arondot/Documents/capsid_protein__YP_002775441__Grapevine_Syrah_virus_1__630199.scores.json", "r") as file:
     data = json.load(file)
 
-data
-str(data)
-
 pLDDT = data["plddt"]
-pLDDT
 
 moyenne = sum(pLDDT)/len(pLDDT)
-moyenne
 
 #####################################
 ##
@@ -33,75 +28,78 @@ os.listdir("/home/arondot/Documents/viral_structures/Adenoviridae")
 glob.glob("/home/arondot/Documents/viral_structures/Adenoviridae/*.json")
 
 data = glob.glob("/home/arondot/Documents/viral_structures/Adenoviridae/*.json")
-data 
 len(data)
 
-type(data)
-
+'''
 E=data[1]
-E
 
 with open(E, "r") as file:
     G = json.load(file)
-G
 
 plddt = G["plddt"]
-plddt
 
 moyenne = sum(plddt)/len(plddt)
-moyenne
+'''
 
 moyenne_list = []
-## Marche mais erreur inconnu à partir du fichier n°558 (fichier vide)
-i = 1
-while i<len(data):
+i = 0
+
+while i<=len(data):
     E=data[i]
     with open(E, "r") as file:
         G = json.load(file)
     plddt = G["plddt"]
     moyenne = sum(plddt)/len(plddt)
-    print(moyenne)
     i = i + 1
     moyenne_list.append(moyenne)
 
-len(data)
-i
-moyenne
-moyenne_list
+len(moyenne_list)
 
 moyenne_general = sum(moyenne_list)/len(moyenne_list)
-moyenne_general
-
-data[558]
 
 #######################################
 ##
-## Calcul moyenne pLDDT de toute les familles (hors undefined_family)
+## Calcul moyenne pLDDT de toute les 132 familles 
 ##
 #######################################
 
-os.listdir("/home/arondot/Documents/viral_structures/")
+## 131 familles (sans undefined) : 
+
 data = glob.glob("/home/arondot/Documents/viral_structures/*viridae/*.json")
-
 len(data)
 
 moyenne_list = []
-## Marche mais erreur inconnu à partir du fichier n°28483 (fichier vide)
-i = 1
-while i<len(data):
+i = 0
+
+while i<=len(data):
     E=data[i]
     with open(E, "r") as file:
         G = json.load(file)
     plddt = G["plddt"]
     moyenne = sum(plddt)/len(plddt)
-    print(moyenne)
+#    print(moyenne)
     i = i + 1
     moyenne_list.append(moyenne)
 
-i
-moyenne
-moyenne_list
+len(moyenne_list)
+
+## Avec undefined_family
+
+data = glob.glob("/home/arondot/Documents/viral_structures/*family/*.json")
+len(data)
+
+i = 0
+while i<=len(data):
+    E=data[i]
+    with open(E, "r") as file:
+        G = json.load(file)
+    plddt = G["plddt"]
+    moyenne = sum(plddt)/len(plddt)
+#    print(moyenne)
+    i = i + 1
+    moyenne_list.append(moyenne)
+
+
+len(moyenne_list) ## si pas d'erreur est censé etre égal au len(data) sans unidefined + len(data) defined
 moyenne_general = sum(moyenne_list)/len(moyenne_list)
 moyenne_general
-
-data[28483]
