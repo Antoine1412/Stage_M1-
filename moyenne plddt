@@ -98,7 +98,6 @@ while i<len(data):
     i = i + 1
     moyenne_list.append(moyenne)
 
-
 i
 moyenne
 moyenne_list
